@@ -22,11 +22,11 @@
 
 先執行 `git branch -r` 查看遠端分支再用 `git branch` 查看本地進行比較，或是直接使用 `git branch -a` 查看全部分支，查看是否有從 GitHub 上刪除但還留在本地的分支：
 
-![image](http branch deleted 1)
+![image](../external/picture/branch-deleted-1.png)
 
 輸入 `git remote prune origin --dry-run` ，查看模擬結果：
 
-![image](branch deleted 2)
+![image](../external/picture/branch-deleted-2.png)
 
  `git prune` 是將失連的物件從儲存庫**修剪**的指令， `--dry-run` 參數是**不進行任何修剪**，**只回報將刪除哪些物件**：
 
@@ -36,7 +36,7 @@
 
 	git remote prune origin
 
-![image](branch deleted 3)
+![image](../external/picture/branch-deleted-3.png)
 
 
 ## 刪除遠端分支 ##
@@ -47,7 +47,7 @@
 
 要注意此指令只會刪除遠端分支，不會刪除本地同名分支。
 
-![image](branch deleted 4)
+![image](../external/picture/branch-deleted-4.png)
 
 在 Git 1.7.0 之後，可以使用這種語法刪除遠程分支：
 
@@ -102,7 +102,7 @@ Before fetching, remove any remote-tracking references that no longer exist on t
 
  `git branch -vv` 會列出本地分支及對應的遠端追蹤分支
 
-![image](branch 1)
+![image](../external/picture/branch-1.png)
 
 
 ## 一、git clone ##
@@ -335,7 +335,7 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 
 儲存在 `.git\refs`
 
-![image](stash)
+![image](../external/picture/stash.png)
 
 最新的暫存檔儲存在 `refs/stash`，舊的暫存檔可以用參考的 reflog 找到。( `stash@{0}` 代表最新的暫存檔， `stash@{1}` 是前一個)。Stash 可以藉由指定索引 (`stash index`) 被參照。(e.g. the integer `n` is equivalent to `stash@{n}`).
 
