@@ -2,6 +2,25 @@
 做一些記錄來補充 30 天速成 Git 之不足
 
 
+## 解決在命令提示字元下使用 Git for Windows 顯示中文的問題 ##
+
+在 Windows 作業系統內部預設以 UTF-16 為預設字集編碼，如果要正常顯示在畫面上，通常會透過控制台中的地區設定進行自動轉換。而在 **繁體中文 (台灣)** 的語言設定下，命令提示字元是以 CP950 也就是 **Big5** 為預設字集，所以任何要顯示在命令提示字元的文字，都會在內部先行轉譯過才能正常輸出。不過要顯示 Big5 字集以外的 Unicode 文字，就必須要透過 `chcp` 命令來幫我們切換預設顯示字集。因此當你需要切換顯示字集的時候，可以試著輸入 `chcp 65001` 來切換成 Unicode 顯示模式。
+
+不過 Git for Windows 內建的 **git.exe** 工具，畢竟是從 UNIX 環境下的工具轉換而來的，在 UNIX-like 作業系統環境下，預設在處理多國語系的時候，會讀取 **LC_ALL** 或 **LANG** 這個環境變數，依據這個環境變數來判斷如何顯示與轉換文字，如果沒有設定的話，就有可能無法正確顯示非英語系語言的文字。
+
+要解決這個問題，只要設定好 **LC_ALL** 環境變數就可以解決。
+
+畢竟 Git 在內部儲存 commit 紀錄的時候，預設都是以 UTF-8 為主要編碼，因此建議各位設定一個 **LC_ALL** 環境變數，將值設定為 **C.UTF-8** 即可解決此問題。
+
+	set LC_ALL=C.UTF-8
+
+如果你想要將 **LC_ALL** 環境變數設定在 **使用者環境變數** 中的話，只要透過 `SETX` 命令就可以快速設定完成，下次就不用再設定了：
+
+	SETX LC_ALL C.UTF-8
+
+[如何解決在命令提示字元下使用 Git for Windows 無法顯示中文的問題](https://blog.miniasp.com/post/2017/09/17/Git-for-Windows-Command-Prompt-Display-Chinese-Issues.aspx)
+
+
 ## 用 git prune 清理掉在 github 已經 deleted 的 local branch ##
 
 在 GitHub 網頁刪除若干舊的 branch 之後，在 local 用 `git branch -r` 做 checkout branch，那些被刪除的 branch 依然會被列出來。
