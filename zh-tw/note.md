@@ -54,6 +54,47 @@
 	git push origin --delete <branchName>
 
 
+## git config 位置 ##
+
+主要使用 `--show-origin` 選項來查看 `--system` 或是 `--global` config 的位置
+
+	git config --list --show-origin
+
+上面指令用於將所有 git configuration files 的位置取出
+
+	git config --list --system --show-origin
+
+上面指令將系統層級的 git configuration files 位置取出
+
+![image](../external/picture/config.png)
+
+[location of configuration files](https://www.onwebsecurity.com/configuration/git-on-windows-location-of-global-configuration-file.html)
+
+[git config 官方文件](https://git-scm.com/docs/git-config)
+
+### Local ###
+
+存放位置都在目錄底下的 `.git` 資料夾
+
+	.git/config
+
+可以使用下面指令來確認
+
+	git config --list --local
+
+### System ###
+
+Git for Windows (64 bit) 存放的相對位置如下：
+
+	%ProgramFiles%\Git\mingw64\etc\gitconfig
+
+### Global ###
+
+放在下面位置：
+
+	%USERPROFILE%\.gitconfig
+
+
 ## 遠端儲存庫 ##
 
 使用該指令可查看遠端主機訊息：
