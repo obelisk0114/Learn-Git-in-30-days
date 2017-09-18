@@ -432,6 +432,19 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 從建立這個 `stash` 的 commit 建立並切換到命名為 `<branchname>` 的新分支，套用這個 `stash` 所記錄的變更到新的索引和工作樹 (working tree)。若成功 `stash` 是 `stash@{<revision>}` 形式的參照，接著捨棄 `stash`。若沒有指定 `stash`，預設是最新的。
 
 
+## Git 多帳號 ##
+
+** TODO **
+
+需要用 SSH 連線並取消 global user.name 和 global user.email。 `git config --global --unset user.name` 以及 `git config --global --unset user.email`。參考：
+
+[如何切換多個 GitHub 帳號](http://www.jianshu.com/p/0ad3d88c51f4)
+
+[Git 的多帳號如何處理](https://gist.github.com/suziewong/4378434)
+
+[多個 Git 帳號之間的切換](http://memoryboxes.github.io/blog/2014/12/07/duo-ge-gitzhang-hao-zhi-jian-de-qie-huan/)
+
+
 ## 其他參考資料 ##
 [Git Magic - 繁體中文版](http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_tw/)
 
