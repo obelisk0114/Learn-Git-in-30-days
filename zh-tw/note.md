@@ -464,6 +464,17 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 [多個 Git 帳號之間的切換](http://memoryboxes.github.io/blog/2014/12/07/duo-ge-gitzhang-hao-zhi-jian-de-qie-huan/)
 
 
+## 其他教學網站 ##
+
+[git tutorial](https://zlargon.gitbooks.io/git-tutorial/content/)
+
+[為你自己學 Git](http://gitbook.tw/)
+
+[程式碼版本控制服務－github入門使用介紹](http://blog.kevinlinul.idv.tw/?p=369)
+
+[連猴子都能懂的Git入門指南  | 貝格樂（Backlog）](https://backlogtool.com/git-tutorial/tw/intro/intro1_1.html)
+
+
 ## 其他參考資料 ##
 [Git Magic - 繁體中文版](http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_tw/)
 
