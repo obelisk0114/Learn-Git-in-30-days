@@ -451,6 +451,56 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 從建立這個 `stash` 的 commit 建立並切換到命名為 `<branchname>` 的新分支，套用這個 `stash` 所記錄的變更到新的索引和工作樹 (working tree)。若成功 `stash` 是 `stash@{<revision>}` 形式的參照，接著捨棄 `stash`。若沒有指定 `stash`，預設是最新的。
 
 
+## Git worktree ##
+
+git repository 可以支援多個 `working tree` ，這使你可以在任何時候於多個分支之間切換。
+
+使用 `git worktree add` 可以將一個新的 working tree 連結到工作目錄，這個 working tree 稱為 `linked working tree` ，相對於 `git init` 或 `git clone` 準備的 `main working tree`。
+
+若不是裸儲存庫的話，一個工作目錄有一個 `main working tree` 以及零個或是數個 `linked working tree`。
+
+[git-worktree](https://git-scm.com/docs/git-worktree)
+
+	$ git worktree add -b hotfix ../hotfix master
+	Preparing ../hotfix (identifier hotfix)
+	HEAD is now at 46d363dc XXX
+
+如此就會在上一層新建立一個 `hotfix` 目錄，並新建一個分支 `hotfix` 。這種工作目錄叫做 `linked working tree` 。
+
+`cd ../hotfix` 就是一個乾淨從 master 分出來的 hotfix 分支，可以在這邊做事。最後 commit 完事之後，直接 `rm -rf` 砍掉這個 hotfix 目錄(放心，東西已經進 branch，這可以砍掉了)，接著 `git worktree prune` 就會清除 `linked working tree` 記錄了。不清除也沒關係，三個月後也會自動清掉。
+
+不過如果你把 `linked working tree` 放在會被移除的裝置上，例如外接硬碟上，這樣可能會不小心被 Git 清掉。這時候需要用 `git worktree lock` 指令。
+
+`git worktree list` 則會列出目前所有的工作目錄。
+
+[Git worktree: 同時開多個工作目錄](https://ihower.tw/blog/archives/8740)
+
+### 新增一個 git worktree ###
+
+假設分支 master 有個很緊急的問題必須馬上解決，但你又不想 stash 手上的所有變更與切換分之的話，可以用以下指令在上層建立一個 temp 資料夾，並且讓該資料夾以分支 master 為基礎，並切換為分支 fix-emergency-issue。
+
+	git worktree add -b fix-emergency-issue ../temp master
+
+然後你就可以移動到 ../temp 去開始修 issue 了！
+
+### 刪除 git worktree ###
+
+Git worktree 的刪除很簡單，就是直接刪除分出來的資料夾就可以了。但是 worktree 的資訊還會存在 `.git` 資料夾中，刪完之後記得執行 `git worktree prune` 清理一下！
+
+	rm -rf ../temp
+	git worktree prune
+
+### 列出所有的 worktree ###
+
+	git worktree list
+
+[Git worktree](https://myapollo.com.tw/2016/08/06/git-worktree/)
+
+[Git 2.5: Worktree](http://pre.tir.tw/008/blog/output/git-25-worktree.html)
+
+[Six cool features of the Git 2.x series](https://developer.atlassian.com/blog/2015/10/cool-features-git-2.x/)
+
+
 ## git-dir & work-tree ##
 
 如果想將 `pygit2` repository 中的某些 `commit` copy 到 `D:\pygit2` 以外的目錄中。此時可以考慮使用 `git checkout` 或者 `git reset` 命令來實現，只需顯式指定 `working-tree` 即可。
