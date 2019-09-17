@@ -375,6 +375,31 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 
 定義後就只需執行 `git latest` 了。注意雙引號需要轉義！
 
+查看 **特定** 被修改檔案的內容
+
+	git diff <file>
+
+使用 `git add -u` 加入所有被更動的檔案（包含 modified 及 deleted）
+
+	git add -u        # 一次加入所有被更動的檔案，包含 modified 及 deleted
+	git add --update  # 同上
+
+使用 `git add -f <file>` 強制 add 被忽略的檔案，`-f` 同等於 `--force`
+
+	git add -f <file>  # 使用這個 -f 參數，強制加入被忽略的檔案
+
+![image](../figures/note/git_add_f.png)
+
+使用 `git mv <file> <directory>` 來搬移檔案
+
+	git mv <file> <directory>  # 將 <file> 搬到 <directory>
+
+使用 `git reset HEAD <file>` 可以將檔案還原到 **未準備提交** 前的狀態
+
+若使用 `git reset HEAD` 而後面不帶 `<file>` 的話，會將這個區塊 **所有** 的檔案都一併還原到 **未準備提交** 前的狀態
+
+![image](../figures/note/git_file_status.jpg)
+
  `git blame` 用來顯示一份文件每一行的最近一次提交的提交hash值和提交者。
 
 	git blame -w  # 忽略移除空白這類改動
@@ -595,6 +620,29 @@ For your case, inside repository `YYY`, you would run:
 [Git 的多帳號如何處理](https://gist.github.com/suziewong/4378434)
 
 [多個 Git 帳號之間的切換](http://memoryboxes.github.io/blog/2014/12/07/duo-ge-gitzhang-hao-zhi-jian-de-qie-huan/)
+
+
+## 其他 git 情境 ##
+
+### 一個檔案可同時為 _Changes not staged for commit_ 及 _Changes to be committed_ ###
+
+我們有一個檔案 `num.txt`，內容是 `11`。
+
+首先我們先新增一行 `22`，然後 `git add` 到 _Changes to be committed_，然後再對 `num.txt` 新增一行 `33`
+
+這時候我們用 `git status` 可以看到 `num.txt` 同時屬於兩種狀態
+
+![image](../figures/note/double_status.png)
+
+這時候我們再用 `git diff` 來查看改變的內容
+
+![image](../figures/note/git_diff.png)
+
+從 `git diff --cached` 可以看到新增 `22` 的部分
+
+從 `git diff` 可以看到新增 `33` 的部分
+
+**`git` 可以只 `commit` 一份檔案中部分的內容，不一定要以整份檔案為單位來提交**
 
 
 ## 其他教學網站 ##
