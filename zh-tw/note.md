@@ -318,6 +318,17 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 
 	git push origin --tags
 
+只推送至部分 commit 而不推送到最新 commit
+
+	git push <remotename> <commit SHA>:<remotebranchname>
+
+舉例
+
+	git push origin 712acff81033eddc90bb2b45e1e4cd031fefc50f:master
+
+[How can I push a specific commit to a remote, and not previous commits?
+](https://stackoverflow.com/questions/3230074/how-can-i-push-a-specific-commit-to-a-remote-and-not-previous-commits)
+
 
 ## Syncing a fork ##
 
@@ -527,6 +538,50 @@ Git worktree 的刪除很簡單，就是直接刪除分出來的資料夾就可�
         那就是 index 中的內容都已經丟失，想要恢復的話存在一定的難度，所以在使用 reset 之前還是慎重一些比較好。
 
 [Git系列之二 --- git-dir & work-tree](http://www.cnblogs.com/Jerryshome/archive/2011/12/15/2289218.html)
+
+
+## Git subtree ##
+
+什麼時候需要 Subtree ？
+
+* 當多個專案共用同一坨程式碼，而這坨程式碼跟著專案在快速更新的時候
+* 把一部分程式碼遷移出去獨立為一個新的 git repo，但又希望能夠保留這部分程式碼的歷史提交記錄
+
+經由 Git Subtree 來維護的子專案程式碼，對於父專案來說是透明的，所有的開發人員看到的就是一個普通的目錄，原來怎麼做現在依舊那麼做，只需要維護這個 Subtree 的人在合適的時候去做同步程式碼的操作。
+
+To merge a repository `<repo>` at revision `<rev>` as subdirectory `<prefix>`, use `git subtree add` as follows:
+
+	git subtree add -P <prefix> <repo> <rev>
+
+git-subtree implements the [subtree merge strategy](https://git-scm.com/book/en/v1/Git-Tools-Subtree-Merging) in a more user friendly manner.
+
+Folder structure before:
+
+	XXX
+	 |- .git
+	 |- (project files)
+	YYY
+	 |- .git
+	 |- (project files)
+
+Folder structure after:
+
+	YYY
+	 |- .git  <-- This now contains the change history from XXX
+	 |-  ZZZ  <-- This was originally XXX
+	      |- (project files)
+	 |-  (project files)
+
+For your case, inside repository `YYY`, you would run:
+
+	git subtree add -P ZZZ /path/to/XXX.git master
+
+[神奇的 Git Subtree](https://hexo.crboy.net/2016/09/amazing-git-subtree/)
+
+[用 Git Subtree 在多個 Git 項目間雙向同步子項目，附簡明使用手冊](https://tech.youzan.com/git-subtree/)
+
+[How to import existing Git repository into another?
+](https://stackoverflow.com/questions/1683531/how-to-import-existing-git-repository-into-another)
 
 
 ## Git 多帳號 ##
