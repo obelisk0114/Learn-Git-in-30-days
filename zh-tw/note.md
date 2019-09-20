@@ -400,6 +400,12 @@ clone 儲存庫時，所使用的遠端儲存庫會自動被 Git 命名為 `orig
 
 ![image](../figures/note/git_file_status.jpg)
 
+使用 `git log --pretty=raw` 來顯示 `parent` 的資訊
+
+	git log --pretty=raw
+
+![image](../figures/note/git_log_raw.png)
+
  `git blame` 用來顯示一份文件每一行的最近一次提交的提交hash值和提交者。
 
 	git blame -w  # 忽略移除空白這類改動
