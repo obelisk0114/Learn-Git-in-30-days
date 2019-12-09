@@ -113,6 +113,18 @@ Git for Windows (64 bit) 存放的相對位置如下：
 
 	%USERPROFILE%\.gitconfig
 
+將編輯器改成 EmEditor：
+
+	git config --global core.editor "'C:\Program Files\EmEditor\EmEditor.exe' //sp"
+
+EmEditor 使用 UTF-8 BOM (不帶簽名) commit：
+
+	git config --global core.editor "'C:\Program Files\EmEditor\EmEditor.exe' //sp //cp 65001"
+
+[EmEditor Using Command Line Options](http://www.emeditor.org/en/howto_file_file_commandline.html)
+
+[起動オプション /sp は廃止になりましたか？](https://jp.emeditor.com/forums/topic/%E8%B5%B7%E5%8B%95%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-sp-%E3%81%AF%E5%BB%83%E6%AD%A2%E3%81%AB%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%E3%81%8B%EF%BC%9F/)
+
 
 ## 遠端儲存庫 ##
 
